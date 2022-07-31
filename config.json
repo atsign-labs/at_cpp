@@ -1,0 +1,6 @@
+{
+  "rootServerHost" : "root.atsign.wtf",
+  "rootServerPort" : "64",
+  "atSign" : "alpaca14precise",
+  "pkamPemFile" : "C:/Users/sting/atsign/at_client_java/at_java/at_client/keys/pkam-alpaca.pem"
+}

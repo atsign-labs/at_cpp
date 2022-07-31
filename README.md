@@ -1,73 +1,41 @@
-<img width=250px src="https://atsign.dev/assets/img/atPlatform_logo_gray.svg?sanitize=true">
+# at_client_cpp
 
-# Sample README
+This project builds a library and a demo executable that implements `@protocol`.
+The library will be 
+`libat_client_cpp.a` and the exe is `at_client_cpp_demo.exe`. 
 
-Open with intent - we welcome contributions - we want pull requests and to hear about issues.
+## Supported platforms
 
-## Who is this for?
+Currently, the project builds using CLion in Windows with the `g++` compiler toolchain, 
+but should be possible to extend to other platforms by tweaking the `CMakeLists.txt` file.
 
-The README should be addressed to somebody who's never seen this before.
-But also don't assume that they're a novice.
+## Building
 
-### Code user
+Run cmake 
+```shell
+cmake.exe --build ./cmake-build-debug --target at_client_cpp_demo
+```
 
-Does this repo publish to [pub.dev](https://pub.dev) or similar?
-In which case the code user just needs a pointer there - e.g. [at_client on pub.dev](https://pub.dev/packages/at_client)
+## Running the demo client
 
-### Contributor
+The exe requires a `config.json` file as an argument. Sample contents are shown below.
+```json
+{
+  "rootServerHost"    : "root.atsign.wtf",
+  "rootServerPort"    : "64",
+  "atSign"            : "<your atsign>",
+  "pkamPemFile"       : "<path of your pem file>"
+}
+```
 
-This is the person who we want working with us here.
-[CONTRIBUTING.md](CONTRIBUTING.md) is going to have the detailed guidance on how to setup their tools,
-tests and how to make a pull request.
+### Sample command line (assuming config file name is config.json)
 
-## Why, What, How?
-
-### Why?
-
-What is the purpose of this project?
-
-### What?
-
-What is needed to get the project and its dependencies installed?
-
-### How?
-
-How does this work? How is this used to fulfil its intended purpose?
-
-## Checklist
-
-### Writing
-
-Does the writing flow, with proper grammar and correct spelling?
-
-### Links
-
-Are the links to external resources correct?
-Are the links to other parts of the project correct
-(beware stuff carried over from previous repos where the
-project might have lived during earlier development)?
-
-### Description
-
-Has the Description field been filled out?
-
-### Acknowledgement/Attribution
-
-Have we correctly acknowledged the work of others (and their Trademarks etc.)
-where appropriate (per the conditions of their LICENSE?
-
-### LICENSE
-
-Which LICENSE are we using?  
-Is the LICENSE(.md) file present?  
-Does it have the correct dates, legal entities etc.?
-
-## Maintainers
-
-Who created this?  
-
-Do they have complete GitHub profiles?  
-
-How can they be contacted?  
-
-Who is going to respond to pull requests?  
+```shell
+at_client_cpp_demo.exe config.json
+```
+### Demo client flow
+The demo client exe first looks up the secondary server for the given atsign. 
+Then it does a `from` for the given atsign to 
+get the challenge (this is required to do `pkam` authentication).
+Next, `pkam` authentication is executed, followed by `scan` and `lookup`.
+In the demo, `llookup` is done instead of `lookup` since it is looking up properties of the local atsign.
